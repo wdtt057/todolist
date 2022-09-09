@@ -11,34 +11,37 @@
     <script async src="./script.js"></script>
   </head>
   <body>
-    <header class="header">implement a todo list</header>
-    <main class="content">
+    <div class="header">
       <input class="todolist__input" />
-      <section class="todolist">
-        <header class="todolist__header">pending Tasks</header>
-        <ul id="todolist_container">
-          <li>
-            <span>todo</span>
-            <button>X</button>
-          </li>
-          <li>
-            <span>todo</span>
-            <button>X</button>
-          </li>
-        </ul>
-      </section>
-      <section class="todolist">
-        <header class="comleted__header">completed Tasks</header>
-        <ul id="completelist_container">
-          <li>
-            <span>todo</span>
-            <button>X</button>
-          </li>
-          <li>
-            <span>todo</span>
-          </li>
-        </ul>
-      </section>
+    </div>
+    <main class="content">
+      <div class="list">
+        <section class="todolist" , id="pendingList">
+          <header class="todolist__header">pending Tasks</header>
+          <ul id="todolist_container">
+            <li>
+              <span>todo</span>
+              <button>X</button>
+            </li>
+            <li>
+              <span>todo</span>
+              <button>X</button>
+            </li>
+          </ul>
+        </section>
+        <section class="todolist" , id="completedList">
+          <header class="todolist__header">completed Tasks</header>
+          <ul id="completelist_container">
+            <li>
+              <span>todo</span>
+              <button>X</button>
+            </li>
+            <li>
+              <span>todo</span>
+            </li>
+          </ul>
+        </section>
+      </div>
     </main>
   </body>
 </html>

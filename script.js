@@ -204,6 +204,23 @@ const Controller = ((model, view) => {
         state.todolist = [removedEle, ...state.todolist];
         model.updateTodoStatus(event.target.id, true);
       }
+      if (event.target.className === 'editbtn') {
+        let id = event.target.id;
+        let curr = document.getElementById(id);
+        let text = curr.parentElement.children[0].innerHTML;
+        console.log(text);
+        let input = curr.parentElement.children[1];
+        let span = curr.parentElement.children[0];
+        span.style.display = 'none';
+        input.style.display = 'inline';
+        input.value = text;
+        input.addEventListener('keyup', (event2) => {
+          if (event2.key === 'Enter' && event2.target.value.trim() !== '') {
+            console.log(event2.target.value);
+            model.updateTodoContent(id, event2.target.value).then(init);
+          }
+        });
+      }
     });
   };
 

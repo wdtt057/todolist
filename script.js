@@ -67,7 +67,8 @@ const View = (() => {
     arr.forEach((todo) => {
       tmp += `
         <li>
-          <span>${todo.id}-${todo.title}</span>
+          <span>${todo.title}</span>
+          <input style="display:none"/>
           <button class="statusbtn" id="${todo.id}">Move</button>
           <button class="editbtn" id="${todo.id}">Edit</button>
           <button class="deletebtn" id="${todo.id}">X</button>
@@ -141,7 +142,7 @@ const Model = ((api, view) => {
 const Controller = ((model, view) => {
   const state = new model.State();
 
-  const deleteTodo = () => {
+  const modifyTodo = () => {
     const todocontainer = document.querySelector(view.domstr.todocontainer);
     todocontainer.addEventListener('click', (event) => {
       if (event.target.className === 'deletebtn') {
@@ -162,12 +163,26 @@ const Controller = ((model, view) => {
         model.updateTodoStatus(event.target.id, false);
       }
       if (event.target.className === 'editbtn') {
-        document.createElement('input');
+        let id = event.target.id;
+        let curr = document.getElementById(id);
+        let text = curr.parentElement.children[0].innerHTML;
+        console.log(text);
+        let input = curr.parentElement.children[1];
+        let span = curr.parentElement.children[0];
+        span.style.display = 'none';
+        input.style.display = 'inline';
+        input.value = text;
+        input.addEventListener('keyup', (event2) => {
+          if (event2.key === 'Enter' && event2.target.value.trim() !== '') {
+            console.log(event2.target.value);
+            model.updateTodoContent(id, event2.target.value).then(init);
+          }
+        });
       }
     });
   };
 
-  const deleteComplete = () => {
+  const modifyComplete = () => {
     const completecontainer = document.querySelector(
       view.domstr.completedcontainner
     );
@@ -224,8 +239,8 @@ const Controller = ((model, view) => {
 
   const bootstrap = () => {
     init();
-    deleteTodo();
-    deleteComplete();
+    modifyTodo();
+    modifyComplete();
     addTodo();
   };
 
